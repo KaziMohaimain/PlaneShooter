@@ -3,6 +3,18 @@ import java.util.ArrayList;
 
 public class GameController {
 
+    private static GameController gameController;
+
+    public static GameController getInstance()
+    {
+        if(gameController == null)
+        {
+            gameController = new GameController();
+        }
+        return gameController;
+    }
+
+//*************************************************************
     private boolean gameOver = false;
 
 //*************************************************************
@@ -20,37 +32,33 @@ public class GameController {
 
     private GameThread gameThread;
 
-    public GameController(GameGrid gamePane, TitleLabel titleLabel) {
-        this.gamePane = gamePane;
-        this.titleLabel = titleLabel;
-
+//Private Constructor:
+    private GameController() {
         bullets = new ArrayList<>();
         enemies = new ArrayList<>();
 
         gameThread = new GameThread();
+    }
 
-        Enemy enemy = new Enemy(gamePane, new Coordinate(10, 5),
-                new Velocity(0,1));
-        enemies.add(enemy);
+    public void init(GameGrid gamePane, TitleLabel titleLabel) {
+        this.gamePane = gamePane;
+        this.titleLabel = titleLabel;
 
-        gameThread.addObject(enemy);
+        plane = new Plane(gamePane, new Coordinate(gamePane.getRowCount()/2, gamePane.getColumnCount()/2));
 
-        enemy = new Enemy(gamePane, new Coordinate(10, 30),
-                new Velocity(1,1));
-        enemies.add(enemy);
-
-        gameThread.addObject(enemy);
-
-        enemy = new Enemy(gamePane, new Coordinate(10, 60),
-                new Velocity(1,0));
-        enemies.add(enemy);
-
-        gameThread.addObject(enemy);
-
-        //plane = new Plane(gamePane, new Coordinate(gamePane.getRowCount()/2, gamePane.getColumnCount()/2));
+        generateEnemy();
 
         gameThread.start();
     }
+
+    public void generateEnemy()
+    {
+        Coordinate c = new Coordinate(1, gamePane.getColumnCount()/2);
+        Enemy enemy = new Enemy(gamePane, c, new Velocity(0,1));
+        enemies.add(enemy);
+        gameThread.addObject(enemy);
+    }
+
 
 //*************************************************************
 //Game Over Function:

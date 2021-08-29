@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements KeyListener {
 
-	private GameController gameController;
-
 	public MainFrame() {
 
 		initFrame();
@@ -26,7 +24,7 @@ public class MainFrame extends JFrame implements KeyListener {
 		
 		this.setVisible(true);
 
-		gameController = new GameController(gamePane, titleLabel);
+		GameController.getInstance().init(gamePane, titleLabel);
 	}
 	
 	private void initFrame()
@@ -39,7 +37,8 @@ public class MainFrame extends JFrame implements KeyListener {
 		contentPane.setLayout(new BorderLayout());
 		contentPane.setBackground(new Color(20, 54, 79));
 		setContentPane(contentPane);
-		
+
+		this.setLocationRelativeTo(null);
 		this.setFocusable(true);
 		this.addKeyListener(this);
 	}
@@ -48,7 +47,7 @@ public class MainFrame extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		gameController.handleKeyPress(e.getKeyCode());
+		GameController.getInstance().handleKeyPress(e.getKeyCode());
 	}
 
 	@Override
