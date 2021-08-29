@@ -1,0 +1,71 @@
+import java.awt.*;
+
+public class Plane extends GameObject {
+
+    private Coordinate head;
+
+    public Plane(GameGrid gameGrid, Coordinate head) {
+        super(gameGrid, new Color(100,150,120));
+        this.head = head;
+        generateCoordinates();
+        draw(false);
+    }
+
+    @Override
+    public void generateCoordinates() {
+        coordinates.add(head);
+
+        coordinates.add(new Coordinate(head.getRow()+1,head.getColumn()));
+        coordinates.add(new Coordinate(head.getRow()-1,head.getColumn()));
+        coordinates.add(new Coordinate(head.getRow(),head.getColumn()+1));
+        coordinates.add(new Coordinate(head.getRow(),head.getColumn()-1));
+
+        coordinates.add(new Coordinate(head.getRow()+2,head.getColumn()));
+
+        coordinates.add(new Coordinate(head.getRow()+2,head.getColumn()-1));
+        coordinates.add(new Coordinate(head.getRow()+2,head.getColumn()-2));
+        coordinates.add(new Coordinate(head.getRow()+3,head.getColumn()-1));
+
+        coordinates.add(new Coordinate(head.getRow()+2,head.getColumn()+1));
+        coordinates.add(new Coordinate(head.getRow()+2,head.getColumn()+2));
+        coordinates.add(new Coordinate(head.getRow()+3,head.getColumn()+1));
+    }
+
+
+    public void moveLeft()
+    {
+        if(coordinates.get(0).getColumn() == 2)
+            return;
+
+        draw(true);
+
+        for(int i=0;i<coordinates.size();i++)
+        {
+            Coordinate c = coordinates.get(i);
+            c.setColumn(c.getColumn() - 1);
+        }
+
+        draw(false);
+    }
+
+    public void moveRight()
+    {
+        if(coordinates.get(0).getColumn() == gameGrid.getColumnCount()-3)
+            return;
+
+        draw(true);
+
+        for(int i=0;i<coordinates.size();i++)
+        {
+            Coordinate c = coordinates.get(i);
+            c.setColumn(c.getColumn() + 1);
+        }
+
+        draw(false);
+    }
+
+    public Coordinate getBulletPosition()
+    {
+        return new Coordinate(coordinates.get(0).getRow()-2, coordinates.get(0).getColumn());
+    }
+}
