@@ -44,7 +44,7 @@ public class GameController {
         this.gamePane = gamePane;
         this.titleLabel = titleLabel;
 
-        plane = new Plane(gamePane, new Coordinate(gamePane.getRowCount()/2, gamePane.getColumnCount()/2));
+        plane = new Plane(new Coordinate(gamePane.getRowCount()/2, gamePane.getColumnCount()/2));
 
         generateEnemy();
 
@@ -54,13 +54,24 @@ public class GameController {
     public void generateEnemy()
     {
         Coordinate c = new Coordinate(1, gamePane.getColumnCount()/2);
-        Enemy enemy = new Enemy(gamePane, c, new Velocity(0,1));
+        Enemy enemy = new Enemy(c, new Velocity(0,1));
         enemies.add(enemy);
         gameThread.addObject(enemy);
     }
 
-
 //*************************************************************
+//Getter Function:
+
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public GameGrid getGamePane() {
+        return gamePane;
+    }
+
+    //*************************************************************
 //Game Over Function:
     public void gameIsOver()
     {
@@ -71,7 +82,7 @@ public class GameController {
 
     public void fireBullet()
     {
-        bullets.add(new Bullet(gamePane, plane.getBulletPosition()));
+        bullets.add(new Bullet(plane.getBulletPosition()));
     }
 
 //*************************************************************

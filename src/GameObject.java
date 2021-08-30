@@ -5,15 +5,12 @@ public abstract class GameObject {
 
 	protected Color color;
 	
-	protected GameGrid gameGrid;
-	
 	protected ArrayList<Coordinate> coordinates;
 	
 //Constructor:
-	public GameObject(GameGrid gameGrid, Color color) {
+	public GameObject(Color color) {
 		coordinates = new ArrayList<>();
 		this.color = color;
-		this.gameGrid = gameGrid;
 	}
 	
 //Draw Function:
@@ -22,7 +19,7 @@ public abstract class GameObject {
 		Color color = erase ? null : this.color;
 		for(int i=0;i<coordinates.size();i++)
 		{
-			gameGrid.drawCell(coordinates.get(i), color);
+			GameController.getInstance().getGamePane().drawCell(coordinates.get(i), color);
 		}
 	}
 	

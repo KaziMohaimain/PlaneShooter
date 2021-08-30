@@ -5,8 +5,8 @@ public class Bullet extends GameObject {
     private Coordinate position;
 
     //Constructor:
-    public Bullet(GameGrid gameGrid, Coordinate position) {
-        super(gameGrid, new Color(180,160,120));
+    public Bullet(Coordinate position) {
+        super(new Color(180,160,120));
 
         this.position = position;
         generateCoordinates();

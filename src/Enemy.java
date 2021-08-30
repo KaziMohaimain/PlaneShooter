@@ -7,8 +7,8 @@ public class Enemy extends GameObject implements AutoMovable {
 	private Velocity velocity;
 	
 //Constructor:
-	public Enemy(GameGrid gameGrid, Coordinate center, Velocity velocity) {
-		super(gameGrid, new Color(100,120,150));
+	public Enemy(Coordinate center, Velocity velocity) {
+		super(new Color(100,120,150));
 
 		this.center = center;
 		this.velocity = velocity;
@@ -54,11 +54,11 @@ public class Enemy extends GameObject implements AutoMovable {
 		int nexCenterRow = center.getRow() + getVelocity().getVerticalVelocity();
 		int nexCenterColumn = center.getColumn() + getVelocity().getHorizontalVelocity();
 
-		if(nexCenterColumn < 1 || nexCenterColumn > gameGrid.getColumnCount()-2)
+		if(nexCenterColumn < 1 || nexCenterColumn > GameController.getInstance().getGamePane().getColumnCount()-2)
 		{
 			velocity.setHorizontalVelocity(-1 * velocity.getHorizontalVelocity());
 		}
-		if(nexCenterRow < 1 || nexCenterRow > gameGrid.getRowCount()-2)
+		if(nexCenterRow < 1 || nexCenterRow > GameController.getInstance().getGamePane().getRowCount()-2)
 		{
 			velocity.setVerticalVelocity(-1 * velocity.getVerticalVelocity());
 		}

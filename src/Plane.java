@@ -4,8 +4,8 @@ public class Plane extends GameObject {
 
     private Coordinate head;
 
-    public Plane(GameGrid gameGrid, Coordinate head) {
-        super(gameGrid, new Color(100,150,120));
+    public Plane(Coordinate head) {
+        super(new Color(100,150,120));
         this.head = head;
         generateCoordinates();
         draw(false);
@@ -50,7 +50,7 @@ public class Plane extends GameObject {
 
     public void moveRight()
     {
-        if(coordinates.get(0).getColumn() == gameGrid.getColumnCount()-3)
+        if(coordinates.get(0).getColumn() == GameController.getInstance().getGamePane().getColumnCount()-3)
             return;
 
         draw(true);
