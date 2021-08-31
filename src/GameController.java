@@ -51,6 +51,7 @@ public class GameController {
         gameThread.start();
     }
 
+//Generate Enemy Function:
     public void generateEnemy()
     {
         Coordinate c = new Coordinate(1, gamePane.getColumnCount()/2);
@@ -59,10 +60,30 @@ public class GameController {
         gameThread.addObject(enemy);
     }
 
+//Dispose Enemy Function:
+    public void disposeEnemy(Enemy enemy)
+    {
+        enemies.remove(enemy);
+        gameThread.removeObject(enemy);
+    }
+
+//*************************************************************
+    public void fireBullet()
+    {
+        Bullet bullet = new Bullet(plane.getBulletPosition());
+
+        bullets.add(bullet);
+        gameThread.addObject(bullet);
+    }
+
+    public void disposeBullet(Bullet bullet)
+    {
+        bullets.remove(bullet);
+        gameThread.removeObject(bullet);
+    }
+
 //*************************************************************
 //Getter Function:
-
-
     public boolean isGameOver() {
         return gameOver;
     }
@@ -78,11 +99,6 @@ public class GameController {
         gameOver = true;
 
         titleLabel.setText("Game Over");
-    }
-
-    public void fireBullet()
-    {
-        bullets.add(new Bullet(plane.getBulletPosition()));
     }
 
 //*************************************************************
