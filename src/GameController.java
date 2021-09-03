@@ -55,7 +55,7 @@ public class GameController {
     public void generateEnemy()
     {
         Coordinate c = new Coordinate(1, gamePane.getColumnCount()/2);
-        Enemy enemy = new Enemy(c, new Velocity(0,1));
+        Enemy enemy = new Enemy(c, new Velocity(1,0));
         enemies.add(enemy);
         gameThread.addObject(enemy);
     }

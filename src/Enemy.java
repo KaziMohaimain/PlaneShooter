@@ -19,7 +19,7 @@ public class Enemy extends GameObject implements AutoMovable {
 
 	@Override
 	public void generateCoordinates() {
-		coordinates.add(center);
+		//coordinates.add(center);
 		coordinates.add(new Coordinate(center.getRow()+1,center.getColumn()));
 		coordinates.add(new Coordinate(center.getRow()-1,center.getColumn()));
 		coordinates.add(new Coordinate(center.getRow(),center.getColumn()+1));
@@ -39,6 +39,9 @@ public class Enemy extends GameObject implements AutoMovable {
 			current.setColumn(current.getColumn() + velocity.getHorizontalVelocity());
 			current.setRow(current.getRow() + velocity.getVerticalVelocity());
 		}
+
+		center.setColumn(center.getColumn() + velocity.getHorizontalVelocity());
+		center.setRow(center.getRow() + velocity.getVerticalVelocity());
 
 		draw(false);
 	}
