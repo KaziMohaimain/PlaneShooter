@@ -83,6 +83,29 @@ public class GameController {
     }
 
 //*************************************************************
+//Check Enemy Hit:
+    public boolean checkEnemyHit(Bullet bullet)
+    {
+        boolean result = false;
+
+        for(int i=0;i<enemies.size();i++)
+        {
+            if(enemies.get(i).checkBulletHit(bullet))
+            {
+                disposeEnemy(enemies.get(i));
+                result = true;
+            }
+        }
+
+        if(result)
+        {
+            disposeBullet(bullet);
+        }
+
+        return result;
+    }
+
+//*************************************************************
 //Getter Function:
     public boolean isGameOver() {
         return gameOver;

@@ -31,7 +31,10 @@ public class Bullet extends GameObject implements AutoMovable {
 
         position.setRow(position.getRow() + velocity.getVerticalVelocity());
 
-        draw(false);
+        if(!GameController.getInstance().checkEnemyHit(this))
+        {
+            draw(false);
+        }
     }
 
     @Override
@@ -49,5 +52,10 @@ public class Bullet extends GameObject implements AutoMovable {
         }
 
         return false;
+    }
+
+//Getter Function:
+    public Coordinate getPosition() {
+        return position;
     }
 }

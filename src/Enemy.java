@@ -67,4 +67,19 @@ public class Enemy extends GameObject implements AutoMovable {
 		}
 		return false;
 	}
+
+	public boolean checkBulletHit(Bullet bullet)
+	{
+		for(int i=0;i<coordinates.size();i++)
+		{
+			if(coordinates.get(i).getRow() == bullet.getPosition().getRow() && coordinates.get(i).getColumn()
+				== bullet.getPosition().getColumn())
+			{
+				draw(true);
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
