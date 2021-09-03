@@ -25,7 +25,7 @@ public class Bullet extends GameObject implements AutoMovable {
         draw(true);
         if(checkoutOfBoundary())
         {
-            //GameController.getInstance().disposeBullet(this);
+            GameController.getInstance().disposeBullet(this);
             return;
         }
 
