@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameController {
 
@@ -32,12 +33,15 @@ public class GameController {
 
     private GameThread gameThread;
 
+    private EnemyGenerator enemyGenerator;
+
 //Private Constructor:
     private GameController() {
         bullets = new ArrayList<>();
         enemies = new ArrayList<>();
 
         gameThread = new GameThread();
+        enemyGenerator = new EnemyGenerator();
     }
 
     public void init(GameGrid gamePane, TitleLabel titleLabel) {
@@ -46,16 +50,18 @@ public class GameController {
 
         plane = new Plane(new Coordinate(gamePane.getRowCount()/2, gamePane.getColumnCount()/2));
 
-        generateEnemy();
-
         gameThread.start();
+        enemyGenerator.start();
     }
 
 //Generate Enemy Function:
     public void generateEnemy()
     {
+        Random random = new Random();
         Coordinate c = new Coordinate(1, gamePane.getColumnCount()/2);
-        Enemy enemy = new Enemy(c, new Velocity(1,0));
+
+        int horizontalVelocity = (int) Math.pow(-1,random.nextInt(2)-1);
+        Enemy enemy = new Enemy(c, new Velocity(horizontalVelocity,1));
         enemies.add(enemy);
         gameThread.addObject(enemy);
     }

@@ -7,14 +7,17 @@ public class GameThread extends Thread {
 
     ArrayList<AutoMovable> deadObjects;
 
+    ArrayList<AutoMovable> newObjects;
+
     public GameThread() {
         objects = new LinkedList<>();
         deadObjects = new ArrayList<>();
+        newObjects = new ArrayList<>();
     }
 
     public void addObject(AutoMovable obj)
     {
-        objects.add(obj);
+        newObjects.add(obj);
     }
 
     public void removeObject(AutoMovable obj)
@@ -26,6 +29,9 @@ public class GameThread extends Thread {
     {
         while(true)
         {
+            objects.addAll(newObjects);
+            newObjects.clear();
+
             for(AutoMovable obj : objects)
             {
                 obj.move();
