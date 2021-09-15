@@ -77,14 +77,13 @@ public class Enemy extends GameObject implements AutoMovable {
 
 	public boolean checkBulletHit(Bullet bullet)
 	{
-		for(int i=0;i<coordinates.size();i++)
+		int horizontalDistance = Math.abs(center.getColumn() - bullet.getPosition().getColumn());
+		int verticalDistance = Math.abs(center.getRow() - bullet.getPosition().getRow());
+
+		if(horizontalDistance <= 1 && verticalDistance <= 1)
 		{
-			if(coordinates.get(i).getRow() == bullet.getPosition().getRow() && coordinates.get(i).getColumn()
-				== bullet.getPosition().getColumn())
-			{
-				draw(true);
-				return true;
-			}
+			draw(true);
+			return true;
 		}
 
 		return false;

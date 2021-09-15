@@ -4,7 +4,7 @@ public class Bullet extends GameObject implements AutoMovable {
 
     private Coordinate position;
 
-    private final Velocity velocity = new Velocity(0,-3);
+    private final Velocity velocity = new Velocity(0,-2);
 
     //Constructor:
     public Bullet(Coordinate position) {
@@ -18,6 +18,7 @@ public class Bullet extends GameObject implements AutoMovable {
     @Override
     public void generateCoordinates() {
         coordinates.add(position);
+        coordinates.add(new Coordinate(position.getRow()+1, position.getColumn()));
     }
 
     @Override
@@ -29,7 +30,10 @@ public class Bullet extends GameObject implements AutoMovable {
             return;
         }
 
-        position.setRow(position.getRow() + velocity.getVerticalVelocity());
+        for(Coordinate c : coordinates)
+        {
+            c.setRow(c.getRow() + velocity.getVerticalVelocity());
+        }
 
         if(!GameController.getInstance().checkEnemyHit(this))
         {
