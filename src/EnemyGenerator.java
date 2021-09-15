@@ -2,7 +2,7 @@ public class EnemyGenerator extends Thread {
 
     public void run()
     {
-        while(true)
+        while(!GameController.getInstance().isGameOver())
         {
             GameController.getInstance().generateEnemy();
             try {

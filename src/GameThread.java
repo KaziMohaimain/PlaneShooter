@@ -27,7 +27,7 @@ public class GameThread extends Thread {
 
     public void run()
     {
-        while(true)
+        while(!GameController.getInstance().isGameOver())
         {
             objects.addAll(newObjects);
             newObjects.clear();
@@ -39,6 +39,8 @@ public class GameThread extends Thread {
 
             objects.removeAll(deadObjects);
             deadObjects.clear();
+
+            GameController.getInstance().checkPlaneCrash();
 
             try {
                 Thread.sleep(100);

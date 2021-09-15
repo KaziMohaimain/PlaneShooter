@@ -110,7 +110,20 @@ public class GameController {
 
         return result;
     }
-
+//*************************************************************
+//Check Plane Crash:
+    public boolean checkPlaneCrash()
+    {
+        for(Enemy e : enemies)
+        {
+            if(plane.checkCollisionWithEnemy(e))
+            {
+                gameIsOver();
+                return true;
+            }
+        }
+        return false;
+    }
 //*************************************************************
 //Getter Function:
     public boolean isGameOver() {
@@ -121,7 +134,7 @@ public class GameController {
         return gamePane;
     }
 
-    //*************************************************************
+//*************************************************************
 //Game Over Function:
     public void gameIsOver()
     {
@@ -133,6 +146,11 @@ public class GameController {
 //*************************************************************
     public void handleKeyPress(int keyCode)
     {
+        if(gameOver)
+        {
+            return;
+        }
+
         switch(keyCode)
         {
             case KeyEvent.VK_SPACE:

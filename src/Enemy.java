@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Enemy extends GameObject implements AutoMovable {
 
@@ -15,6 +16,12 @@ public class Enemy extends GameObject implements AutoMovable {
 
 		generateCoordinates();
 		draw(false);
+	}
+
+//Getter Function:
+	public ArrayList<Coordinate> getCoordinates()
+	{
+		return coordinates;
 	}
 
 	@Override

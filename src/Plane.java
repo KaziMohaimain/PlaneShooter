@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Plane extends GameObject {
 
@@ -45,7 +46,10 @@ public class Plane extends GameObject {
             c.setColumn(c.getColumn() - 1);
         }
 
-        draw(false);
+        if(!GameController.getInstance().checkPlaneCrash())
+        {
+            draw(false);
+        }
     }
 
     public void moveRight()
@@ -61,11 +65,34 @@ public class Plane extends GameObject {
             c.setColumn(c.getColumn() + 1);
         }
 
-        draw(false);
+        if(!GameController.getInstance().checkPlaneCrash())
+        {
+            draw(false);
+        }
     }
 
     public Coordinate getBulletPosition()
     {
         return new Coordinate(coordinates.get(0).getRow()-2, coordinates.get(0).getColumn());
     }
+
+//Check collision with enemy:
+    public Boolean checkCollisionWithEnemy(Enemy enemy)
+    {
+        ArrayList<Coordinate> enemyCoordinates = enemy.getCoordinates();
+        for(Coordinate ec: enemyCoordinates)
+        {
+            for(Coordinate pc: coordinates)
+            {
+                if(ec.getRow() == pc.getRow() && ec.getColumn() == pc.getColumn())
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+//*************************************************************
+
 }
