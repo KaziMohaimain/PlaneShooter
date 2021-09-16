@@ -18,6 +18,8 @@ public class GameController {
 //*************************************************************
     private boolean gameOver = false;
 
+    private int gameScore = 0;
+
 //*************************************************************
 //Reference of gameGrid and titleLabel:
     private GameGrid gamePane;
@@ -58,7 +60,7 @@ public class GameController {
     public void generateEnemy()
     {
         Random random = new Random();
-        Coordinate c = new Coordinate(1, gamePane.getColumnCount()/2);
+        Coordinate c = new Coordinate(1, random.nextInt(gamePane.getColumnCount()-3)+1);
 
         int horizontalVelocity = (int) Math.pow(-1,random.nextInt(2)-1);
         Enemy enemy = new Enemy(c, new Velocity(horizontalVelocity,1));
@@ -100,6 +102,7 @@ public class GameController {
             {
                 disposeEnemy(enemies.get(i));
                 result = true;
+                updateScore();
             }
         }
 
@@ -110,7 +113,14 @@ public class GameController {
 
         return result;
     }
-//*************************************************************
+
+    private void updateScore()
+    {
+        gameScore += 5;
+        titleLabel.setText("Score: " + gameScore);
+    }
+
+    //*************************************************************
 //Check Plane Crash:
     public boolean checkPlaneCrash()
     {
