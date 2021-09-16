@@ -165,6 +165,14 @@ public class GameController {
                 plane.moveRight();
                 break;
 
+            case KeyEvent.VK_UP:
+                plane.moveUp();
+                break;
+
+            case KeyEvent.VK_DOWN:
+                plane.moveDown();
+                break;
+
             default:
                 break;
         }

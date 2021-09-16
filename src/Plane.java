@@ -32,37 +32,48 @@ public class Plane extends GameObject {
         coordinates.add(new Coordinate(head.getRow()+3,head.getColumn()+1));
     }
 
-
+//Move Functions:
     public void moveLeft()
     {
-        if(coordinates.get(0).getColumn() == 2)
+        if(head.getColumn() == 2)
             return;
 
-        draw(true);
-
-        for(int i=0;i<coordinates.size();i++)
-        {
-            Coordinate c = coordinates.get(i);
-            c.setColumn(c.getColumn() - 1);
-        }
-
-        if(!GameController.getInstance().checkPlaneCrash())
-        {
-            draw(false);
-        }
+        move(0,-1);
     }
 
     public void moveRight()
     {
-        if(coordinates.get(0).getColumn() == GameController.getInstance().getGamePane().getColumnCount()-3)
+        if(head.getColumn() == GameController.getInstance().getGamePane().getColumnCount()-3)
             return;
 
+        move(0,1);
+    }
+
+    public void moveUp()
+    {
+        if(head.getRow() == 1)
+            return;
+
+        move(-1,0);
+    }
+
+    public void moveDown()
+    {
+        if(head.getRow() == GameController.getInstance().getGamePane().getRowCount()-4)
+            return;
+
+        move(1,0);
+    }
+
+    public void move(int vR, int vC)
+    {
         draw(true);
 
         for(int i=0;i<coordinates.size();i++)
         {
             Coordinate c = coordinates.get(i);
-            c.setColumn(c.getColumn() + 1);
+            c.setRow(c.getRow() + vR);
+            c.setColumn(c.getColumn() + vC);
         }
 
         if(!GameController.getInstance().checkPlaneCrash())
@@ -70,10 +81,11 @@ public class Plane extends GameObject {
             draw(false);
         }
     }
+//*************************************************************
 
     public Coordinate getBulletPosition()
     {
-        return new Coordinate(coordinates.get(0).getRow()-2, coordinates.get(0).getColumn());
+        return new Coordinate(head.getRow()-2, head.getColumn());
     }
 
 //Check collision with enemy:
